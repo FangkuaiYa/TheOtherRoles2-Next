@@ -21,7 +21,7 @@ public static class CustomHatManager
         get
         {
             var (owner, repository) = Repository;
-            return $"https://raw.githubusercontent.com/{owner}/{repository}/master";
+            return Helpers.isChinese() ? $"https://gitee.com/kuai-fang/the-other-hats2/raw/master" : $"https://raw.githubusercontent.com/{owner}/{repository}/master";
         }
     }
 

@@ -11,6 +11,7 @@ using TheOtherRoles.Utilities;
 using AmongUs.Data;
 using Assets.InnerNet;
 using System.Linq;
+using TMPro;
 
 namespace TheOtherRoles.Modules {
     [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
@@ -22,51 +23,60 @@ namespace TheOtherRoles.Modules {
 
         private static void Prefix(MainMenuManager __instance) {
             var template = GameObject.Find("ExitGameButton");
-            var template2 = GameObject.Find("CreditsButton");
-            if (template == null || template2 == null) return;
-            template.transform.localScale = new Vector3(0.42f, 0.84f, 0.84f);
-            template.GetComponent<AspectPosition>().anchorPoint = new Vector2(0.625f, 0.5f);
-            template.transform.FindChild("FontPlacer").transform.localScale = new Vector3(1.8f, 0.9f, 0.9f);
-            template.transform.FindChild("FontPlacer").transform.localPosition = new Vector3(-1.1f, 0f, 0f);
-
-            template2.transform.localScale = new Vector3(0.42f, 0.84f, 0.84f);
-            template2.GetComponent<AspectPosition>().anchorPoint = new Vector2(0.378f, 0.5f);
-            template2.transform.FindChild("FontPlacer").transform.localScale = new Vector3(1.8f, 0.9f, 0.9f);
-            template2.transform.FindChild("FontPlacer").transform.localPosition = new Vector3(-1.1f, 0f, 0f);
-
-
-
-            var buttonDiscord = UnityEngine.Object.Instantiate(template, template.transform.parent);
-            buttonDiscord.transform.localScale = new Vector3(0.42f, 0.84f, 0.84f);
-            buttonDiscord.GetComponent<AspectPosition>().anchorPoint = new Vector2(0.542f, 0.5f);
-
-            var textDiscord = buttonDiscord.transform.GetComponentInChildren<TMPro.TMP_Text>();
-            __instance.StartCoroutine(Effects.Lerp(0.5f, new System.Action<float>((p) => {
-                textDiscord.SetText("TOR Discord");
-            })));
-            PassiveButton passiveButtonDiscord = buttonDiscord.GetComponent<PassiveButton>();
-            
-            passiveButtonDiscord.OnClick = new Button.ButtonClickedEvent();
-            passiveButtonDiscord.OnClick.AddListener((System.Action)(() => Application.OpenURL("https://discord.gg/77RkMJHWsM")));
-
-
-            
-            // TOR credits button
             if (template == null) return;
-            var creditsButton = Object.Instantiate(template, template.transform.parent);
 
-            creditsButton.transform.localScale = new Vector3(0.42f, 0.84f, 0.84f);
-            creditsButton.GetComponent<AspectPosition>().anchorPoint = new Vector2(0.462f, 0.5f);
+            var buttonDiscord = UnityEngine.Object.Instantiate(template, null);
+            GameObject.Destroy(buttonDiscord.GetComponent<AspectPosition>());
+            buttonDiscord.transform.localPosition = new(-0.459f, -1.87f, 0);
 
-            var textCreditsButton = creditsButton.transform.GetComponentInChildren<TMPro.TMP_Text>();
-            __instance.StartCoroutine(Effects.Lerp(0.5f, new System.Action<float>((p) => {
-                textCreditsButton.SetText("TOR Credits");
+            var textDiscord = buttonDiscord.GetComponentInChildren<TextMeshPro>();
+            textDiscord.transform.localPosition = new(0, 0.035f, -2);
+            textDiscord.alignment = TextAlignmentOptions.Right;
+            __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) =>
+            {
+                if (textDiscord != null)
+                    textDiscord.SetText("Discord");
             })));
-            PassiveButton passiveCreditsButton = creditsButton.GetComponent<PassiveButton>();
 
-            passiveCreditsButton.OnClick = new Button.ButtonClickedEvent();
+            PassiveButton passiveButtonDiscord = buttonDiscord.GetComponent<PassiveButton>();
+            SpriteRenderer buttonSpriteDiscord = buttonDiscord.transform.FindChild("Inactive").GetComponent<SpriteRenderer>();
 
-            passiveCreditsButton.OnClick.AddListener((System.Action)delegate {
+            passiveButtonDiscord.OnClick = new Button.ButtonClickedEvent();
+            passiveButtonDiscord.OnClick.AddListener((System.Action)(() => Application.OpenURL("https://discord.gg/AFWJVn87Bd")));
+
+            Color discordColor = new Color32(88, 101, 242, byte.MaxValue);
+            buttonSpriteDiscord.color = textDiscord.color = discordColor;
+            passiveButtonDiscord.OnMouseOut.AddListener((System.Action)delegate
+            {
+                buttonSpriteDiscord.color = textDiscord.color = discordColor;
+            });
+
+
+            // TOR credits button
+            var buttoncredits = GameObject.Instantiate(template, null);
+            Object.Destroy(buttoncredits.GetComponent<AspectPosition>());
+            buttoncredits.transform.localPosition = new(-0.459f, -1.48f, 0);
+
+            var textcredits = buttoncredits.GetComponentInChildren<TextMeshPro>();
+            textcredits.transform.localPosition = new(0, 0.035f, -2);
+            textcredits.alignment = TextAlignmentOptions.Right;
+            __instance.StartCoroutine(Effects.Lerp(0.1f, new System.Action<float>((p) =>
+            {
+                textcredits.SetText("TOR Credits");
+            })));
+
+            PassiveButton passiveButtoncredits = buttoncredits.GetComponent<PassiveButton>();
+            SpriteRenderer buttonSpritecredits = buttoncredits.transform.FindChild("Inactive").GetComponent<SpriteRenderer>();
+
+            passiveButtoncredits.OnClick = new Button.ButtonClickedEvent();
+            Color creditsColor = new Color32(0, 245, 255, byte.MaxValue);
+            buttonSpritecredits.color = textcredits.color = creditsColor;
+            passiveButtoncredits.OnMouseOut.AddListener((System.Action)delegate
+            {
+                buttonSpritecredits.color = textcredits.color = creditsColor;
+            });
+            passiveButtoncredits.OnClick.AddListener((System.Action)delegate
+            {
                 // do stuff
                 if (popUp != null) Object.Destroy(popUp);
                 var popUpTemplate = Object.FindObjectOfType<AnnouncementPopUp>(true);

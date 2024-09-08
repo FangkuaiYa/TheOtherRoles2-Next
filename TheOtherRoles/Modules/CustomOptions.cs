@@ -1178,8 +1178,7 @@ namespace TheOtherRoles {
     //This class is taken and adapted from Town of Us Reactivated, https://github.com/eDonnes124/Town-Of-Us-R/blob/master/source/Patches/CustomOption/Patches.cs, Licensed under GPLv3
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate {
-        private static GameObject GameSettingsObject;
-        private static TextMeshPro GameSettings;
+        private static TextMeshPro GameSettings = null;
         public static float
             MinX,/*-5.3F*/
             OriginalY = 2.9F,

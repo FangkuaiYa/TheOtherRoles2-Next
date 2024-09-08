@@ -15,35 +15,42 @@ namespace TheOtherRoles.Patches {
     [HarmonyPatch]
     public static class CredentialsPatch {
         public static string fullCredentialsVersion = 
-$@"<size=130%><color=#ff351f>TheOtherRoles</color></size> v{TheOtherRolesPlugin.Version.ToString() + (TheOtherRolesPlugin.betaDays>0 ? "-BETA": "")}";
+$@"<size=130%>{Helpers.GradientColorText("FFD700", "FF0000", $"TheOtherRoles Community Edition")}</size> v{TheOtherRolesPlugin.Version.ToString() + (TheOtherRolesPlugin.betaDays>0 ? "-BETA": "")}";
 public static string fullCredentials =
-$@"<size=60%>Modded by <color=#FCCE03FF>Eisbison</color>, <color=#FCCE03FF>EndOfFile</color>
+$@"<size=70%>Modded by <color=#00ffff>FangKuai</color>, <color=#FCCE03FF>Eisbison</color>, <color=#FCCE03FF>EndOfFile</color>
 <color=#FCCE03FF>Thunderstorm584</color>, <color=#FCCE03FF>Mallöris</color> & <color=#FCCE03FF>Gendelo</color>
 Design by <color=#FCCE03FF>Bavari</color></size>";
 
     public static string mainMenuCredentials = 
-$@"Modded by <color=#FCCE03FF>Eisbison</color>, <color=#FCCE03FF>Thunderstorm584</color>, <color=#FCCE03FF>EndOfFile</color>, <color=#FCCE03FF>Mallöris</color> & <color=#FCCE03FF>Gendelo</color>
-Design by <color=#FCCE03FF>Bavari</color>";
+$@"Modded by <color=#00ffff>FangKuai</color>, <color=#FCCE03FF>Eisbison</color>, <color=#FCCE03FF>Thunderstorm584</color>, <color=#FCCE03FF>EndOfFile</color>
+<color=#FCCE03FF>Mallöris</color> & <color=#FCCE03FF>Gendelo</color>  Design by <color=#FCCE03FF>Bavari</color>";
 
         public static string contributorsCredentials =
-$@"<size=60%> <color=#FCCE03FF>Special thanks to Smeggy</color></size>";
+$@"<size=70%> <color=#FCCE03FF>Special thanks to <b>Scoom</b>, Smeggy, Imp11 & Spex</color></size>";
 
         [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
         internal static class PingTrackerPatch
         {
 
             static void Postfix(PingTracker __instance){
-                __instance.text.alignment = TextAlignmentOptions.Top;
+                var ping = AmongUsClient.Instance.Ping;
+                string PingColor = "#ff4500";
+                if (ping < 50) PingColor = "#44dfcc";
+                else if (ping < 100) PingColor = "#7bc690";
+                else if (ping < 200) PingColor = "#f3920e";
+                else if (ping < 400) PingColor = "#ff146e";
+
+                __instance.text.alignment = AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ? TextAlignmentOptions.Top : TextAlignmentOptions.TopLeft;
                 var position = __instance.GetComponent<AspectPosition>();
-                position.Alignment = AspectPosition.EdgeAlignments.Top;
+                position.Alignment = AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ? AspectPosition.EdgeAlignments.Top : AspectPosition.EdgeAlignments.LeftTop;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) {
                     string gameModeText = $"";
                     if (HideNSeek.isHideNSeekGM) gameModeText = $"Hide 'N Seek";
                     else if (HandleGuesser.isGuesserGm) gameModeText = $"Guesser";
                     else if (PropHunt.isPropHuntGM) gameModeText = "Prop Hunt";
                     if (gameModeText != "") gameModeText = Helpers.cs(Color.yellow, gameModeText) + "\n";
-                    __instance.text.text = $"<size=130%><color=#ff351f>TheOtherRoles</color></size> v{TheOtherRolesPlugin.Version.ToString() + (TheOtherRolesPlugin.betaDays > 0 ? "-BETA" : "")}\n{gameModeText}" + __instance.text.text;
-                    position.DistanceFromEdge = new Vector3(2.25f, 0.11f, 0);
+                    __instance.text.text = $"<size=130%><color=#ff351f>TheOtherRoles CE</color></size> v{TheOtherRolesPlugin.Version.ToString() + (TheOtherRolesPlugin.betaDays > 0 ? "-BETA" : "")}\n{gameModeText}" + $"<color={PingColor}>PING: <b>{AmongUsClient.Instance.Ping}</b> MS</color>";
+                    position.DistanceFromEdge = new Vector3(1.5f, 0.11f, 0);
                 } else {
                     string gameModeText = $"";
                     if (TORMapOptions.gameMode == CustomGamemodes.HideNSeek) gameModeText = $"Hide 'N Seek";
@@ -51,8 +58,8 @@ $@"<size=60%> <color=#FCCE03FF>Special thanks to Smeggy</color></size>";
                     else if (TORMapOptions.gameMode == CustomGamemodes.PropHunt) gameModeText = $"Prop Hunt";
                     if (gameModeText != "") gameModeText = Helpers.cs(Color.yellow, gameModeText);
 
-                    __instance.text.text = $"{fullCredentialsVersion}\n{fullCredentials}\n {__instance.text.text}";
-                    position.DistanceFromEdge = new Vector3( 0f, 0.1f, 0);
+                    __instance.text.text = $"{fullCredentialsVersion}\n{fullCredentials}\n <color={PingColor}>PING: <b>{AmongUsClient.Instance.Ping}</b> MS</color>";
+                    position.DistanceFromEdge = new Vector3(0.5f, 0.11f);
 
                     try {
                         var GameModeText = GameObject.Find("GameModeText")?.GetComponent<TextMeshPro>();

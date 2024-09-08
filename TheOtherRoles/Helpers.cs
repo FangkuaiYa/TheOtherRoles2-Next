@@ -16,6 +16,8 @@ using TheOtherRoles.CustomGameModes;
 using Reactor.Utilities.Extensions;
 using AmongUs.GameOptions;
 using TheOtherRoles.Patches;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using JetBrains.Annotations;
 
 namespace TheOtherRoles {
 
@@ -672,5 +674,91 @@ namespace TheOtherRoles {
         {
             return AccessTools.Method(self.GetType(), nameof(Il2CppObjectBase.TryCast)).MakeGenericMethod(type).Invoke(self, Array.Empty<object>());
         }
+        // Intersteing Color Gradient Feature(from github.com/dabao40/TheOtherRolesGMIA)
+        public static string GradientColorText(string startColorHex, string endColorHex, string text)
+        {
+            if (startColorHex.Length != 6 || endColorHex.Length != 6)
+            {
+                TheOtherRolesPlugin.Logger.LogError("GradientColorText : Invalid Color Hex Code, Hex code should be 6 characters long (without #) (e.g., FFFFFF).");
+                return text;
+            }
+
+            Color startColor = HexToColor(startColorHex);
+            Color endColor = HexToColor(endColorHex);
+
+            int textLength = text.Length;
+            float stepR = (endColor.r - startColor.r) / (float)textLength;
+            float stepG = (endColor.g - startColor.g) / (float)textLength;
+            float stepB = (endColor.b - startColor.b) / (float)textLength;
+            float stepA = (endColor.a - startColor.a) / (float)textLength;
+
+            string gradientText = "";
+
+            for (int i = 0; i < textLength; i++)
+            {
+                float r = startColor.r + (stepR * i);
+                float g = startColor.g + (stepG * i);
+                float b = startColor.b + (stepB * i);
+                float a = startColor.a + (stepA * i);
+
+
+                string colorhex = ColorToHex(new Color(r, g, b, a));
+                gradientText += $"<color=#{colorhex}>{text[i]}</color>";
+
+            }
+
+            return gradientText;
+
+        }
+
+        public static Color HexToColor(string hex)
+        {
+            Color color = new();
+            ColorUtility.TryParseHtmlString("#" + hex, out color);
+            return color;
+        }
+
+        private static string ColorToHex(Color color)
+        {
+            Color32 color32 = (Color32)color;
+            return $"{color32.r:X2}{color32.g:X2}{color32.b:X2}{color32.a:X2}";
+        }
+        public static GameObject CreateObject(string objName, Transform parent, Vector3 localPosition, int? layer = null)
+        {
+            var obj = new GameObject(objName);
+            obj.transform.SetParent(parent);
+            obj.transform.localPosition = localPosition;
+            obj.transform.localScale = new Vector3(1f, 1f, 1f);
+            if (layer.HasValue) obj.layer = layer.Value;
+            else if (parent != null) obj.layer = parent.gameObject.layer;
+            return obj;
+        }
+        public static T CreateObject<T>(string objName, Transform parent, Vector3 localPosition, int? layer = null) where T : Component
+        {
+            return CreateObject(objName, parent, localPosition, layer).AddComponent<T>();
+        }
+        public static bool isChinese()
+        {
+            try
+            {
+                var name = CultureInfo.CurrentUICulture.Name;
+                if (name.StartsWith("zh")) return true;
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static void DestroyTranslator(this GameObject obj)
+        {
+            var translator = obj.GetComponent<TextTranslatorTMP>();
+            if (translator != null)
+            {
+                UnityEngine.Object.Destroy(translator);
+            }
+        }
+        public static void DestroyTranslator(this MonoBehaviour obj) => obj.gameObject.DestroyTranslator();
+
     }
 }
