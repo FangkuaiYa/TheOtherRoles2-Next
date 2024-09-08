@@ -16,28 +16,19 @@
       },
       "BepInEx.Unity.IL2CPP": {
         "type": "Direct",
-        "requested": "[6.0.0-be.692, )",
-        "resolved": "6.0.0-be.692",
-        "contentHash": "rYjnJCN2APD/04dZUKhRCbu30jhzseIKd0+pfaWWgfDJNggd8rq+whEzM/ZC0fEkkLgcIkEgbtX2LuSqsCrIgg==",
+        "requested": "[6.0.0-be.697, )",
+        "resolved": "6.0.0-be.697",
+        "contentHash": "+ahFT8WkKZ8m9NCdXgQI05M34/mdE1MXmLnLRKhqpjId6mqDQf9ORJ1bCPifdkbgYJjteIvey9EreCfmD9Vndw==",
         "dependencies": {
-          "BepInEx.Core": "6.0.0-be.692",
-          "BepInEx.Unity.Common": "6.0.0-be.692",
-          "HarmonyX": "2.10.1",
-          "Iced": "1.20.0",
+          "BepInEx.Core": "6.0.0-be.697",
+          "BepInEx.Unity.Common": "6.0.0-be.697",
+          "HarmonyX": "2.10.2",
+          "Iced": "1.21.0",
           "Il2CppInterop.Generator": "1.4.6-ci.426",
           "Il2CppInterop.HarmonySupport": "1.4.6-ci.426",
           "Il2CppInterop.Runtime": "1.4.6-ci.426",
           "MonoMod.RuntimeDetour": "22.5.1.1",
           "Samboy063.Cpp2IL.Core": "2022.1.0-development.972"
-        }
-      },
-      "Reactor": {
-        "type": "Direct",
-        "requested": "[2.2.0, )",
-        "resolved": "2.2.0",
-        "contentHash": "foMHya01tmr//3tw+kO7FmY1ojnR0m+ShMU6sxogbnWeO85lmX3QM8aSIsYeAhtJSThf6Ben6iTM4O0KgVcmqw==",
-        "dependencies": {
-          "BepInEx.Unity.IL2CPP": "6.0.0-be.670"
         }
       },
       "AsmResolver": {
@@ -85,25 +76,25 @@
       },
       "AssetRipper.Primitives": {
         "type": "Transitive",
-        "resolved": "3.1.1",
-        "contentHash": "GhFAVMWpG8MyZscQxwYCd1HSS36UhIQeW0Gn9iPYiininZWlo8RTV9tGYv0CNNXw5bODYJtXf4qiqo6sQOVAEg=="
+        "resolved": "3.1.3",
+        "contentHash": "djZbN/+EXmI+Oia9Pm0LyjZVCPLf60TPSL5rGb7mBEYM5F4CN3nPFXvl2yA5LanPZoHS1Yq7PghGUmkP7Pv9RQ=="
       },
       "BepInEx.Core": {
         "type": "Transitive",
-        "resolved": "6.0.0-be.692",
-        "contentHash": "I/JuhVhOXUFRrSxy7MqMHpygKoYNt39XY5V8e7PTLbq+nfCBGYzOhszcPx90Wj5xGPx6IFuABJocWAbFDHUddA==",
+        "resolved": "6.0.0-be.697",
+        "contentHash": "6p/zLtBja8BEA5+FwFwH1lUg8avO725mZKRw0P1JbuXj/XUZL8Qy5n0c7COiq/dJ58nCyW5J/ldeYUHM0c4vRA==",
         "dependencies": {
-          "HarmonyX": "2.10.1",
+          "HarmonyX": "2.10.2",
           "MonoMod.Utils": "22.5.1.1",
           "SemanticVersioning": "2.0.2"
         }
       },
       "BepInEx.Unity.Common": {
         "type": "Transitive",
-        "resolved": "6.0.0-be.692",
-        "contentHash": "QYsp8Sf4kQwmx4qwFLhS7SW+Dp67iBibb0zo5IdMQXGmS0KY2WH7/SZ+fFmG6ce06BT+E58wsxk0rU6NW0qWbg==",
+        "resolved": "6.0.0-be.697",
+        "contentHash": "6eTjN4vBy7veWUwCVWqfvL05fQ4MskpjD4wIsD0FF8g0kF/1lKjsK0Fmyb4N78vSrvm/tV1quhHChCh2SQU0GQ==",
         "dependencies": {
-          "AssetRipper.Primitives": "3.1.1",
+          "AssetRipper.Primitives": "3.1.3",
           "MonoMod.Utils": "22.5.1.1"
         }
       },
@@ -114,8 +105,8 @@
       },
       "HarmonyX": {
         "type": "Transitive",
-        "resolved": "2.10.1",
-        "contentHash": "9LodMC9Y0u1TW96eKJoWrFJFpmzbgojEO38/Q+e7c1mFPhmHt8xcR8qhI06iF1rf0Dnsk+hqENFVSgbtwl/bEw==",
+        "resolved": "2.10.2",
+        "contentHash": "/5WwkxXX8mPsRuigQt957rJGx1f0dDQxk+bvk4yYITKFjXas9Em+O71zEP8X0ym8OFQQ2XH/2SxS4NC7vEC+Xg==",
         "dependencies": {
           "MonoMod.RuntimeDetour": "22.3.23.4",
           "System.Reflection.Emit": "4.7.0"
@@ -123,8 +114,8 @@
       },
       "Iced": {
         "type": "Transitive",
-        "resolved": "1.20.0",
-        "contentHash": "cjk+vNDIatLI5vQ22tOCAzsgowZ32Ob1Fy4ljQSfqfzMe5ATKXU+dMPRE6+cIUUFetoyyWkUJArJoxe3QwDXAA=="
+        "resolved": "1.21.0",
+        "contentHash": "dv5+81Q1TBQvVMSOOOmRcjJmvWcX3BZPZsIq31+RLc5cNft0IHAyNlkdb7ZarOWG913PyBoFDsDXoCIlKmLclg=="
       },
       "Il2CppInterop.Common": {
         "type": "Transitive",
@@ -312,31 +303,31 @@
       },
       "Samboy063.Cpp2IL.Core": {
         "type": "Transitive",
-        "resolved": "2022.1.0-pre-release.13",
-        "contentHash": "d3/E3e2rCDlnRiFdNyLxE94XKabsCdMEzVblzsraodYxQhjCXacn75KHkp3Jwj+6Y8A3usehMInDWep4L/+TQQ==",
+        "resolved": "2022.1.0-development.972",
+        "contentHash": "nCO5VGiZzMqdtf1yZZQwhJ+DHklSBqDxF25mTsfw8mP56wt4TBYiQyXnj2EASqbz2VN0+NqUB3jlcuOgD0gNHg==",
         "dependencies": {
           "AsmResolver.DotNet": "5.5.0",
           "AssetRipper.CIL": "1.0.0",
           "AssetRipper.Gee.External.Capstone": "2.3.1",
           "Disarm": "2022.1.0-master.26",
           "Iced": "1.20.0",
-          "Samboy063.LibCpp2IL": "2022.1.0-pre-release.13",
-          "StableNameDotNet": "0.1.0-pre-release.13"
+          "Samboy063.LibCpp2IL": "2022.1.0-development.972",
+          "StableNameDotNet": "0.1.0-development.972"
         }
       },
       "Samboy063.LibCpp2IL": {
         "type": "Transitive",
-        "resolved": "2022.1.0-pre-release.13",
-        "contentHash": "fwkVLAXqD+7XfIXJEDh2OkJqe6YMkNmOP05oudEnuq3ITEuVUSb0K8ffa22vx+n/NDIyNP+s1lLRFcmHVP57oQ==",
+        "resolved": "2022.1.0-development.972",
+        "contentHash": "8GtNi2i4CVXlunDyNhV1cZrxWNxlPejD5VPHgQ14bYrTjG8Rn7nGDt64B5cklGUT/FMADA9t/ZAALTMJ6UXpTA==",
         "dependencies": {
           "AssetRipper.Primitives": "2.1.0",
-          "Samboy063.WasmDisassembler": "2022.1.0-pre-release.13"
+          "Samboy063.WasmDisassembler": "2022.1.0-development.972"
         }
       },
       "Samboy063.WasmDisassembler": {
         "type": "Transitive",
-        "resolved": "2022.1.0-pre-release.13",
-        "contentHash": "dI4PDG+AFctYzaD0pqojK7SGiiPi6xgIRXp07hHnXumW+DYbS2nVQ8nTFSHiP6xE7UhW6I+PpbC5jh/2nksW+Q=="
+        "resolved": "2022.1.0-development.972",
+        "contentHash": "lfbUsyjArvISK9oJBx+QmDwtjXg425K66BmLUoeqzJ11kt0EAUMM34qGEMDceNyNYfl5Op5RpS+krkq/sudM4g=="
       },
       "SemanticVersioning": {
         "type": "Transitive",
@@ -345,8 +336,8 @@
       },
       "StableNameDotNet": {
         "type": "Transitive",
-        "resolved": "0.1.0-pre-release.13",
-        "contentHash": "8ovX1WcVUO6R1pHzaW1v1SC9coSWSYh5JjjZ/vvr7jsb7+hWzMVpsV+uyWLMie9olE2FW1k4RLaXf5GmvlVwMg=="
+        "resolved": "0.1.0-development.972",
+        "contentHash": "1G965uhTTEI5sKU/CFMGuhzuxDophrYS2otI3Ej+BAhbEOq//LFWpoEwhaWW5moKW0K56ZCqvB8YqnEKyk9kbA=="
       },
       "System.Collections": {
         "type": "Transitive",
